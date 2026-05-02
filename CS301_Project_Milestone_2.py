@@ -68,7 +68,7 @@ fig, ax = plt.subplots(3, 2, figsize=(20, 20))
 for idx, col in enumerate(happiness_numeric.keys()):
     sns.histplot(happiness[col], ax=ax[idx//2][idx % 2], kde=True, bins=happiness_numeric[col])
 sns.countplot(data=happiness, x='Traffic_Density', order=['Low', 'Medium', 'High', 'Very High'], ax=ax[2][1]) 
-plt.title('Histograms of each feature in the first dataset')
+fig.suptitle('Histograms of each feature in the first dataset', y=0.905, fontsize=30)
 plt.tight_layout()
 plt.savefig('output/happiness_featurehistograms.png')
 plt.close()
@@ -182,7 +182,7 @@ categories = {
 fig, ax = plt.subplots(4, 2, figsize=(20, 20))
 for idx, col in enumerate(categories.keys()):
     sns.histplot(cost_categorized[col], ax=ax[idx//2][idx % 2], kde=True, bins=categories[col])
-plt.title('Histograms of Each Cost-of-Living Category')
+fig.suptitle('Histograms of Each Cost-of-Living Category', y=0.905, fontsize=30)
 plt.tight_layout()
 plt.savefig("output/cost_categorydistributions.png")
 plt.close()
