@@ -68,7 +68,7 @@ fig, ax = plt.subplots(3, 2, figsize=(20, 20))
 for idx, col in enumerate(happiness_numeric.keys()):
     sns.histplot(happiness[col], ax=ax[idx//2][idx % 2], kde=True, bins=happiness_numeric[col])
 sns.countplot(data=happiness, x='Traffic_Density', order=['Low', 'Medium', 'High', 'Very High'], ax=ax[2][1]) 
-fig.suptitle('Histograms of each feature in the first dataset', y=0.905, fontsize=30)
+fig.suptitle('Histograms of each feature in the first dataset', y=0.99, fontsize=30)
 plt.tight_layout()
 plt.savefig('output/happiness_featurehistograms.png')
 plt.close()
@@ -182,7 +182,7 @@ categories = {
 fig, ax = plt.subplots(4, 2, figsize=(20, 20))
 for idx, col in enumerate(categories.keys()):
     sns.histplot(cost_categorized[col], ax=ax[idx//2][idx % 2], kde=True, bins=categories[col])
-fig.suptitle('Histograms of Each Cost-of-Living Category', y=0.905, fontsize=30)
+fig.suptitle('Histograms of Each Cost-of-Living Category', y=0.99, fontsize=30)
 plt.tight_layout()
 plt.savefig("output/cost_categorydistributions.png")
 plt.close()
@@ -227,7 +227,7 @@ features = ['Decibel_Level', 'Green_Space_Area', 'Air_Quality_Index', 'Healthcar
 fig, ax = plt.subplots(len(features)//2, 2, figsize=(20, 40))
 for idx, col in enumerate(features):
     sns.barplot(data=merged, x='Traffic_Density', y=col, order=['Low', 'Medium', 'High', 'Very High'], ax=ax[idx//2][idx % 2])
-plt.title('Average Value of each Feature and Traffic Density')
+fig.suptitle('Average Value of each Feature and Traffic Density', y=0.995, fontsize=30)
 plt.tight_layout()
 plt.savefig("output/merged_trafficdensityvsfeatures.png")
 plt.close()
@@ -266,21 +266,21 @@ test_features = ['Decibel_Level', 'Traffic_Density_Encoded', 'Green_Space_Area',
 alpha = 0.05
 
 with open("output/pearson_results.txt", "w") as file:
-    file.write("="*60)
-    file.write("PEARSON CORRELATION vs HAPPINESS SCORE")
-    file.write("="*60)
-    file.write(f"{'Feature':<28} {'r':>8} {'P-Value':>10}   Verdict")
-    file.write("-"*60)
+    file.write("="*60 + "\n")
+    file.write("PEARSON CORRELATION vs HAPPINESS SCORE\n")
+    file.write("="*60 + "\n")
+    file.write(f"{'Feature':<28} {'r':>8} {'P-Value':>10}   Verdict\n")
+    file.write("-"*60 + "\n")
 
     for col in test_features:
         clean = df[[col, 'Happiness_Score']].dropna()
         r, p = stats.pearsonr(clean[col], clean['Happiness_Score'])
         verdict = "We reject the null hypothesis." if p < alpha else "We fail to reject the null hypothesis."
-        file.write(f"{col:<28} {r:>8.4f} {p:>10.2e}   {verdict}")
+        file.write(f"{col:<28} {r:>8.4f} {p:>10.2e}   {verdict}\n")
 
-    file.write("-"*60)
-    file.write(f"\nAlpha: {alpha}")
-    file.write("Reject H0 if p-value < 0.05")
+    file.write("-"*60 + "\n")
+    file.write(f"\nAlpha: {alpha}\n")
+    file.write("Reject H0 if p-value < 0.05\n")
 
 #
 #   MODEL EVALUATION
@@ -316,8 +316,8 @@ r2 = r2_score(y_test, y_pred)
 rmse = np.sqrt(mean_squared_error(y_test, y_pred))
 
 with open("output/model_results.txt", "w") as file:
-    file.write(f"R^2: {r2}")
-    file.write(f"RMSE: {rmse}")
+    file.write(f"R^2: {r2}\n")
+    file.write(f"RMSE: {rmse}\n")
 
 
 plt.figure(figsize=(8,6))
@@ -342,7 +342,7 @@ coeffs = model.coef_
 
 with open("output/model_coefficients.txt", "w") as file:
     for name, coef in zip(feature_names, coeffs):
-        file.write(f"{name}: {coef}")
+        file.write(f"{name}: {coef}\n")
 
 #
 #   KNOWLEDGE DISCOVERY
