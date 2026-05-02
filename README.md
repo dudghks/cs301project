@@ -31,4 +31,4 @@ To generate the output visualizations, run the container with the a mount to the
 
 ```docker run -v "$(pwd)/output":/proj/output cs301-project```
 
-Alternatively, you may view and execute the notebook using Jupyter Notebook or similar software given you have the dependencies outlined in `requirements.txt` installed.
+Alternatively, you may view and execute the notebook using Jupyter Notebook or similar software given you have the dependencies outlined in `requirements.txt` installed. Please note that the Dockerfile does not include Jupyter as this was not part of the project specifications.
